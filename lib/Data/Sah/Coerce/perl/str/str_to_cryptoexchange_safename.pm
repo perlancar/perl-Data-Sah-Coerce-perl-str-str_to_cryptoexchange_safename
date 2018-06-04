@@ -30,7 +30,7 @@ sub coerce {
         "",
         "do { my \$cat = CryptoExchange::Catalog->new; my \@data = \$cat->all_data; ",
         "my \$lc = lc($dt); my \$rec; for (\@data) { if (defined(\$_->{code}) && \$lc eq lc(\$_->{code}) || \$lc eq lc(\$_->{name}) || \$lc eq \$_->{safename}) { \$rec = \$_; last } } ",
-        "if (!\$rec) { ['Unknown cryptoexchange code/name/safename'] } else { [undef, \$rec->{safename}] } ",
+        "if (!\$rec) { ['Unknown cryptoexchange code/name/safename: ' . \$lc] } else { [undef, \$rec->{safename}] } ",
         "}",
     );
 

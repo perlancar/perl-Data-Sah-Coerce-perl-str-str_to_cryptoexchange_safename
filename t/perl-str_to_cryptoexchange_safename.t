@@ -19,7 +19,7 @@ subtest "basics" => sub {
     is_deeply($c->("GDAX"), [1, undef, "gdax"]);
     is_deeply($c->("bx thailand"), [1, undef, "bx-thailand"]);
     is_deeply($c->("BX-Thailand"), [1, undef, "bx-thailand"]);
-    is_deeply($c->("foo"), [1, "Unknown cryptoexchange code/name/safename", undef]);
+    is_deeply($c->("foo"), [1, "Unknown cryptoexchange code/name/safename: foo", undef]);
 };
 
 done_testing;
