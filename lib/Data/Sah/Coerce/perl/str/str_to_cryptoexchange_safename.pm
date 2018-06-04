@@ -9,9 +9,9 @@ use warnings;
 
 sub meta {
     +{
-        v => 2,
+        v => 3,
         enable_by_default => 0,
-        might_die => 1,
+        might_fail => 1,
         prio => 50,
         precludes => [qr/\Astr_to_cryptoexchange_(.+)?\z/],
     };
@@ -30,8 +30,8 @@ sub coerce {
         "",
         "do { my \$cat = CryptoExchange::Catalog->new; my \@data = \$cat->all_data; ",
         "my \$lc = lc($dt); my \$rec; for (\@data) { if (defined(\$_->{code}) && \$lc eq lc(\$_->{code}) || \$lc eq lc(\$_->{name}) || \$lc eq \$_->{safename}) { \$rec = \$_; last } } ",
-        "unless (\$rec) { die 'Unknown cryptoexchange code/name/safename: ' . \$lc } ",
-        "\$rec->{safename} }",
+        "if (!\$rec) { ['Unknown cryptoexchange code/name/safename'] } else { [undef, \$rec->{safename}] } ",
+        "}",
     );
 
     $res;
